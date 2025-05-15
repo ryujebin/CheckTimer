@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
+import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 
-import 'Timer/Timer_main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.background,
         fontFamily: 'Pretendard', // 원하는 폰트 지정
       ),
-      home: const TimerMain(), // 시작화면을 TimerMain으로 설정
+      home: const HomeScreen(), // 시작화면을 TimerMain으로 설정
     );
   }
 }

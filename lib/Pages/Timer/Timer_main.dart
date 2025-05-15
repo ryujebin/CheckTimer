@@ -5,7 +5,7 @@ import 'package:test_flutter/Components/InputField/InputField.dart';
 import 'package:test_flutter/Components/TitleText/TitleText.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 
-import '../Components/Buttons/DropdownButton/DropdownButton.dart';
+import '../../Components/Buttons/DropdownButton/DropdownButton.dart';
 
 class TimerMain extends StatefulWidget {
   const TimerMain({super.key});
