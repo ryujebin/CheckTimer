@@ -6,13 +6,17 @@ class ElevationBtn extends StatelessWidget {
   final double? height;
   final double? width;
   final VoidCallback onPressed;
+  final double fontSize;
+  final FontWeight fontWeight;
 
   const ElevationBtn({
     super.key,
     required this.text,
     required this.onPressed,
-    this.height = 50, // 기본 높이 50
-    this.width, // 기본 width는 null, 양쪽 여백 56씩 남기게 처리
+    this.height = 50,
+    this.width,
+    this.fontSize = 20,
+    this.fontWeight = FontWeight.bold,
   });
 
   @override
@@ -37,10 +41,10 @@ class ElevationBtn extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Pretendard',
-              fontWeight: FontWeight.bold,
-              fontSize: 16, // 텍스트 크기
+              fontWeight: fontWeight,
+              fontSize: fontSize,
             ),
           ),
         ),

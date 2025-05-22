@@ -3,6 +3,8 @@ import 'package:test_flutter/Components/SplashScreen/SplashScreen.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 
+import 'Pages/SplashScreen/SplashScreen.dart';
+
 
 void main() {
   runApp(const MyApp());

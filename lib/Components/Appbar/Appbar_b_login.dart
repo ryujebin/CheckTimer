@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Core/theme/colors.dart';
+import '../../Pages/Login/Login.dart';
 
 class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -37,7 +38,12 @@ class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(right: 23),
           child: ElevatedButton(
-            onPressed: onLoginPressed ?? () {},
+            onPressed: onLoginPressed ?? () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               //fixedSize: const Size(61, 28),

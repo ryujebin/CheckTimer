@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/Core/theme/colors.dart';
 
 class TitleText extends StatelessWidget {
   final String text;            // 표시할 문구
@@ -11,7 +12,7 @@ class TitleText extends StatelessWidget {
     super.key,
     required this.text,
     this.fontSize = 40,
-    this.color = Colors.black,
+    this.color = AppColors.secondary,
     this.fontFamily = 'Pretendard',
     this.fontWeight = FontWeight.w800,
   });
