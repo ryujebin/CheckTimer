@@ -10,6 +10,8 @@ class TextBtn extends StatelessWidget {
   final Color? borderColor;
   final double borderWidth;
   final bool underline;
+  final double? height; // ← 추가됨
+  final Color textcolor;
 
   const TextBtn({
     super.key,
@@ -20,6 +22,8 @@ class TextBtn extends StatelessWidget {
     this.borderColor,
     this.borderWidth = 1.0,
     this.underline = false,
+    this.height, // ← 추가됨
+    this.textcolor = AppColors.primary,
   });
 
   @override
@@ -35,6 +39,7 @@ class TextBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        minimumSize: Size(0, height ?? 0), // ← height 지정
         textStyle: TextStyle(
           fontSize: fontSize,
           fontFamily: 'Pretendard',
@@ -43,7 +48,10 @@ class TextBtn extends StatelessWidget {
           underline ? TextDecoration.underline : TextDecoration.none,
         ),
       ),
-      child: Text(text),
+      child: Text(text,
+      style: TextStyle(
+        color: textcolor,
+      ),),
     );
   }
 }
