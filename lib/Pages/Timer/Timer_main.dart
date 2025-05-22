@@ -29,7 +29,6 @@ class _TimerMainState extends State<TimerMain> {
             children: [
               TitleText(
                 text: '초기 설정',
-                color: AppColors.secondary,
               ),
               InputField(
                 hintText: '주제를 입력하세요.',

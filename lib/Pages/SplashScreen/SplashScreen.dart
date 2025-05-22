@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 
-import '../TitleText/TitleText.dart';
+import '../../Components/TitleText/TitleText.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _logoController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500), // 좀 더 천천히
+      duration: const Duration(milliseconds: 1500),
     );
 
     _logoAnimation = Tween<Offset>(
