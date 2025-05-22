@@ -7,6 +7,7 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final double? width;
+  final Widget? suffix;
 
   const InputField({
     super.key,
@@ -15,6 +16,7 @@ class InputField extends StatelessWidget {
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.width,
+    this.suffix,
   });
 
   @override
@@ -30,19 +32,22 @@ class InputField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            labelText,
-            style: const TextStyle(
-              fontSize: 14,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
+          if (labelText.trim().isNotEmpty)
+            Text(
+              labelText,
+              style: const TextStyle(
+                fontSize: 14,
+                fontFamily: 'Pretendard',
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
-          ),
+          if (labelText.trim().isNotEmpty) const SizedBox(height: 4),
           Container(
             width: fieldWidth,
             height: 50,
             decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 color: AppColors.primary,
@@ -60,6 +65,7 @@ class InputField extends StatelessWidget {
               ),
               decoration: InputDecoration(
                 hintText: hintText,
+                suffix: suffix,
                 hintStyle: const TextStyle(
                   color: Color(0xFFA6A6A6),
                   fontFamily: 'Pretendard',

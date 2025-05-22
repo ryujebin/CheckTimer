@@ -132,7 +132,7 @@ class _DropdownState<T> extends State<Dropdown<T>> {
             child: Container(
               width: fieldWidth,
               decoration: BoxDecoration(
-                color: AppColors.background,
+                color: Colors.white,
                 border: Border.all(
                   color: AppColors.primary,
                   width: isOpen ? 2 : 1,
@@ -150,11 +150,8 @@ class _DropdownState<T> extends State<Dropdown<T>> {
                         widget.value?.toString() ?? widget.hintText,
                         style: TextStyle(
                           fontFamily: 'Pretendard',
-                          fontWeight:
-                          widget.value == null ? FontWeight.w300 : FontWeight.bold,
-                          color: widget.value == null
-                              ? const Color(0xFFA6A6A6)
-                              : AppColors.primary,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFFA6A6A6),
                         ),
                       ),
                       const Icon(Icons.arrow_drop_down, color: AppColors.primary),
