@@ -16,10 +16,13 @@ class TimerMain extends StatefulWidget {
 
 class _TimerMainState extends State<TimerMain> {
   String? selectedCategory;
+  String? selectedCategory1;
 
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    TextEditingController controller1 = TextEditingController();
+    TextEditingController controller2 = TextEditingController();
 
     return Scaffold(
         appBar: BeforeAppbar(),
@@ -45,7 +48,7 @@ class _TimerMainState extends State<TimerMain> {
                       child: InputField(
                         hintText: '입력하세요.',
                         labelText: '속력',
-                        controller: controller,
+                        controller: controller1,
                       ),
                     ),
                     const SizedBox(width: 12), // 사이 간격
@@ -76,7 +79,7 @@ class _TimerMainState extends State<TimerMain> {
                       child: InputField(
                         hintText: '입력하세요.',
                         labelText: '거리',
-                        controller: controller,
+                        controller: controller2,
                       ),
                     ),
                     const SizedBox(width: 12), // 사이 간격
@@ -86,10 +89,10 @@ class _TimerMainState extends State<TimerMain> {
                         labelText: '단위',
                         hintText: '선택',
                         items: ['선택', 'M', 'KM'],
-                        value: selectedCategory,
+                        value: selectedCategory1,
                         onChanged: (value) {
                           setState(() {
-                            selectedCategory = value;
+                            selectedCategory1 = value;
                           });
                         },
                       ),

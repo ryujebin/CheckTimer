@@ -58,21 +58,31 @@ class InputField extends StatelessWidget {
               controller: controller,
               keyboardType: keyboardType,
               style: const TextStyle(
-                color: AppColors.primary,
+                color: Colors.black,
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.bold,
                 decorationThickness: 0,
               ),
               decoration: InputDecoration(
                 hintText: hintText,
-                suffix: suffix,
+                isDense: true,
+                suffixIcon: suffix != null
+                    ? Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: suffix,
+                )
+                    : null,
+                suffixIconConstraints: const BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                ),
                 hintStyle: const TextStyle(
                   color: Color(0xFFA6A6A6),
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w300,
                 ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
               ),
             ),
           ),
