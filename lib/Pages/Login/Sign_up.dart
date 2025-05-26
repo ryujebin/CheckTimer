@@ -12,7 +12,10 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
+    TextEditingController controller_name = TextEditingController();
+    TextEditingController controller_pw = TextEditingController();
+    TextEditingController controller_num = TextEditingController();
+    TextEditingController controller_verification = TextEditingController();
     return Scaffold(
       body: Center(
         child: Column(
@@ -27,17 +30,17 @@ class SignUp extends StatelessWidget {
             InputField(
               hintText: '이름을 입력하세요.',
               labelText: 'NAME',
-              controller: controller,
+              controller: controller_name,
             ),
             InputField(
               hintText: '비밀번호를 입력하세요.',
               labelText: 'PASSWORD',
-              controller: controller,
+              controller: controller_pw,
             ),
             InputField(
               hintText: '전화번호를 입력하세요.',
               labelText: 'PHONE NUMBER',
-              controller: controller,
+              controller: controller_num,
               suffix: TextBtn(
                 text: '인증번호 발송',
                 textcolor: Color(0xFF000000),
@@ -54,7 +57,7 @@ class SignUp extends StatelessWidget {
                   width: 100,
                   hintText: '인증번호',
                   labelText: ' ',
-                  controller: controller,
+                  controller: controller_verification,
                 ),
               ),
             ),
