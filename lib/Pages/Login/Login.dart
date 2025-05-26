@@ -11,7 +11,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller_name = TextEditingController();
+    TextEditingController controller_email = TextEditingController();
     TextEditingController controller_pw = TextEditingController();
     return Scaffold(
       body: Center(
@@ -25,9 +25,9 @@ class Login extends StatelessWidget {
               ),
             ),
             InputField(
-              hintText: '이름을 입력하세요.',
-              labelText: 'NAME',
-              controller: controller_name,
+              hintText: 'E-mail을 입력하세요.',
+              labelText: 'E-MAIL',
+              controller: controller_email,
             ),
             InputField(
               hintText: '비밀번호를 입력하세요.',
@@ -37,7 +37,7 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 42),
               child: ElevationBtn(
-                text: '시작하기',
+                text: '시작 하기',
                 onPressed: () {},
               ),
             ),

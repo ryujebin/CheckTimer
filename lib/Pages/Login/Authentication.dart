@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
-import 'package:test_flutter/Pages/Login/Authentication.dart';
 
 import '../../Components/Buttons/ElevationButton/ElevationButton.dart';
 import '../../Components/Buttons/TextButton/TextButton.dart';
@@ -8,14 +7,12 @@ import '../../Components/InputField/InputField.dart';
 import '../../Components/TitleText/TitleText.dart';
 import 'Login.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+class Authentication extends StatelessWidget {
+  const Authentication({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller_email = TextEditingController();
-    TextEditingController controller_pw = TextEditingController();
-    TextEditingController controller_name = TextEditingController();
+    TextEditingController controller_num = TextEditingController();
     return Scaffold(
       body: Center(
         child: Column(
@@ -30,28 +27,20 @@ class SignUp extends StatelessWidget {
             InputField(
               hintText: 'E-mail을 입력하세요.',
               labelText: 'E-MAIL',
-              controller: controller_email,
-            ),
-            InputField(
-              hintText: '비밀번호를 입력하세요.',
-              labelText: 'PASSWORD',
-              controller: controller_pw,
-            ),
-            InputField(
-              hintText: '이름을 입력하세요.',
-              labelText: 'NAME',
-              controller: controller_name,
+              controller: controller_num,
+              suffix: TextBtn(
+                text: '인증요청',
+                textcolor: Color(0xFF000000),
+                fontSize: 13,
+                fontWeight: FontWeight.w300,
+                borderColor: AppColors.primary,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 42),
               child: ElevationBtn(
-                text: '가입 하기',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Authentication()),
-                  );
-                },
+                text: '인증 완료',
+                onPressed: () {},
               ),
             ),
           ],

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "631536859986",
+    "project_id": "check-timer-58811",
+    "storage_bucket": "check-timer-58811.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631536859986:android:b26e8cd2ee14a7fa1e988b",
+        "android_client_info": {
+          "package_name": "com.ryujebin.timerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMc-m4BRGnvte16Ogjnxv3qS4mWozL_Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
