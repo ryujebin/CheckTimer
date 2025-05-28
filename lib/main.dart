@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'Pages/SplashScreen/SplashScreen.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
