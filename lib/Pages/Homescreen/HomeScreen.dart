@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 
@@ -20,11 +21,33 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   void _onItemTapped(int index) {
+    if (index == 1) {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        // 로그인 안 되어있을 경우 알림창 띄우기
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('알림'),
+            content: const Text('로그인 후 사용 가능합니다.'),
+            actions: [
+              TextButton(
+                child: const Text('확인'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+        return;
+      }
+    }
+
+    // 로그인되어 있거나 타이머 페이지일 경우 페이지 변경
     setState(() {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

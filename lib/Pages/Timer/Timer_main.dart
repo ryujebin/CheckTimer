@@ -25,91 +25,94 @@ class _TimerMainState extends State<TimerMain> {
     TextEditingController controller2 = TextEditingController();
 
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: BeforeAppbar(),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TitleText(
-                text: '초기 설정',
-              ),
-              InputField(
-                hintText: '주제를 입력하세요.',
-                labelText: 'TITLE',
-                controller: controller,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 47), // 양 옆 여백 조정
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1, // 가중치
-                      child: InputField(
-                        hintText: '입력하세요.',
-                        labelText: '속력',
-                        controller: controller1,
-                      ),
-                    ),
-                    const SizedBox(width: 12), // 사이 간격
-                    Expanded(
-                      flex: 1, // 드롭다운은 조금 좁게
-                      child: Dropdown<String>(
-                        labelText: '단위',
-                        hintText: '선택',
-                        items: ['선택', 'M/S', 'KM/H'],
-                        value: selectedCategory,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedCategory = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleText(
+                  text: '초기 설정',
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 47), // 양 옆 여백 조정
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1, // 가중치
-                      child: InputField(
-                        hintText: '입력하세요.',
-                        labelText: '거리',
-                        controller: controller2,
-                      ),
-                    ),
-                    const SizedBox(width: 12), // 사이 간격
-                    Expanded(
-                      flex: 1, // 드롭다운은 조금 좁게
-                      child: Dropdown<String>(
-                        labelText: '단위',
-                        hintText: '선택',
-                        items: ['선택', 'M', 'KM'],
-                        value: selectedCategory1,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedCategory1 = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+                InputField(
+                  hintText: '주제를 입력하세요.',
+                  labelText: 'TITLE',
+                  controller: controller,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: ElevationBtn(
-                  text: '설정 완료',
-                  onPressed: () {
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 47), // 양 옆 여백 조정
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1, // 가중치
+                        child: InputField(
+                          hintText: '입력하세요.',
+                          labelText: '속력',
+                          controller: controller1,
+                        ),
+                      ),
+                      const SizedBox(width: 12), // 사이 간격
+                      Expanded(
+                        flex: 1, // 드롭다운은 조금 좁게
+                        child: Dropdown<String>(
+                          labelText: '단위',
+                          hintText: '선택',
+                          items: ['선택', 'M/S', 'KM/H'],
+                          value: selectedCategory,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 47), // 양 옆 여백 조정
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1, // 가중치
+                        child: InputField(
+                          hintText: '입력하세요.',
+                          labelText: '거리',
+                          controller: controller2,
+                        ),
+                      ),
+                      const SizedBox(width: 12), // 사이 간격
+                      Expanded(
+                        flex: 1, // 드롭다운은 조금 좁게
+                        child: Dropdown<String>(
+                          labelText: '단위',
+                          hintText: '선택',
+                          items: ['선택', 'M', 'KM'],
+                          value: selectedCategory1,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory1 = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: ElevationBtn(
+                    text: '설정 완료',
+                    onPressed: () {
 
-                  },
-                ),
-              )
-            ],
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }

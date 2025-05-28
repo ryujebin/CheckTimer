@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../Core/theme/colors.dart';
 import '../../Pages/Login/Login.dart';
 
-class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
+class BeforeAppbar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final double fontSize;
   final double leftPadding;
-  final VoidCallback? onLoginPressed; // 로그인 버튼 클릭 시 실행할 함수
+  final VoidCallback? onLoginPressed;
 
   const BeforeAppbar({
     super.key,
@@ -18,18 +19,49 @@ class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
+  State<BeforeAppbar> createState() => _BeforeAppbarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _BeforeAppbarState extends State<BeforeAppbar> {
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = FirebaseAuth.instance.currentUser;
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      setState(() {
+        _user = user;
+      });
+    });
+  }
+
+  void _handleLogout() async {
+    await FirebaseAuth.instance.signOut();
+    setState(() {
+      _user = null;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("로그아웃 되었습니다.")),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Padding(
-        padding: EdgeInsets.only(left: leftPadding),
+        padding: EdgeInsets.only(left: widget.leftPadding),
         child: Text(
-          title,
+          widget.title,
           style: TextStyle(
             color: AppColors.secondary,
-            fontSize: fontSize,
+            fontSize: widget.fontSize,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -38,22 +70,24 @@ class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(right: 23),
           child: ElevatedButton(
-            onPressed: onLoginPressed ?? () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Login()),
-              );
-            },
+            onPressed: _user == null
+                ? widget.onLoginPressed ??
+                    () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                }
+                : _handleLogout,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              //fixedSize: const Size(61, 28),
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.background,
               textStyle: const TextStyle(fontSize: 14),
             ),
-            child: const Text(
-                '로그인',
-              style: TextStyle(
+            child: Text(
+              _user == null ? '로그인' : '로그아웃',
+              style: const TextStyle(
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.bold,
               ),
@@ -66,8 +100,4 @@ class BeforeAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
