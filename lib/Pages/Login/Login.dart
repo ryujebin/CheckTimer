@@ -4,7 +4,7 @@ import 'package:test_flutter/Components/Buttons/ElevationButton/ElevationButton.
 import 'package:test_flutter/Components/Buttons/TextButton/TextButton.dart';
 import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 import 'package:test_flutter/Pages/Login/Sign_up.dart';
-import 'package:test_flutter/Pages/Timer/Timer_main.dart';
+import 'package:test_flutter/Pages/Timer/Timer_setting.dart';
 
 import '../../Components/InputField/InputField.dart';
 import '../../Components/TitleText/TitleText.dart';

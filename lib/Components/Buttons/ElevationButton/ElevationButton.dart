@@ -3,6 +3,7 @@ import '../../../Core/theme/colors.dart';
 
 class ElevationBtn extends StatelessWidget {
   final String text;
+  final Widget? child;
   final double? height;
   final double? width;
   final VoidCallback onPressed;
@@ -13,6 +14,7 @@ class ElevationBtn extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    this.child,
     this.height = 50,
     this.width,
     this.fontSize = 20,
@@ -39,14 +41,15 @@ class ElevationBtn extends StatelessWidget {
           padding: EdgeInsets.zero, // padding 없애기
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              fontFamily: 'Pretendard',
-              fontWeight: fontWeight,
-              fontSize: fontSize,
-            ),
-          ),
+          child: child ??
+              Text(
+                text ?? '',
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontWeight: fontWeight,
+                  fontSize: fontSize,
+                ),
+              ),
         ),
       ),
     );

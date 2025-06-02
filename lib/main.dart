@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:test_flutter/Providers/Timer_setting_data_provider.dart';
 import 'Pages/SplashScreen/SplashScreen.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TimerSettingDataProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
