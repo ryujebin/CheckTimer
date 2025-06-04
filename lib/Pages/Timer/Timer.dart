@@ -82,6 +82,7 @@ class _TimerPageState extends State<TimerPage> {
 
   String _twoDigits(int n) => n.toString().padLeft(2, '0');
 
+
   Widget build(BuildContext context) {
     final settingData =
         Provider.of<TimerSettingDataProvider>(context).settingData;
@@ -93,85 +94,117 @@ class _TimerPageState extends State<TimerPage> {
         child: settingData == null
             ? const Center(child: Text('설정 데이터가 없습니다.'))
             : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text_Title(settingData.title),
-                  ),
-                  Text_Speed(settingData.speed, settingData.speedUnit),
-                  Text_Distance(
-                      settingData.distance, settingData.distanceUnit),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text_Title(settingData.title),
+            ),
+            Text_Speed(settingData.speed, settingData.speedUnit),
+            Text_Distance(
+                settingData.distance, settingData.distanceUnit),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Center(
-                      child: Text(
-                        _formatTime(_seconds),
-                        style: const TextStyle(
-                          fontSize: 50,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Center(
+                child: Text(
+                  _formatTime(_seconds),
+                  style: const TextStyle(
+                    fontSize: 50,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      StartStopButton(),
-                      const SizedBox(width: 20),
-                      CheckResetButton(),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        top: BorderSide(color: AppColors.primary, width: 1),
-                        bottom: BorderSide(color: AppColors.primary, width: 3),
-                      ),
-                    ),
-                    child: Center(
-                      child: const Text(
-                        'Check List',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                          fontFamily: 'Pretendard',
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: _checkList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          child: Text(
-                            '${index + 1}. ${_checkList[index]}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              color: Colors.white,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StartStopButton(),
+                const SizedBox(width: 20),
+                CheckResetButton(),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: AppColors.primary, width: 1),
+                  bottom: BorderSide(color: AppColors.primary, width: 3),
+                ),
+              ),
+              child: Center(
+                child: const Text(
+                  'Check List',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                    fontFamily: 'Pretendard',
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                controller: _scrollController,
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: _checkList.length,
+                itemBuilder: (context, index) {
+                  final parts = _checkList[index].split(',');
+                  final time = parts.length > 0 ? parts[0].trim() : '';
+                  final speed = parts.length > 1 ? parts[1].trim() : '';
+                  final distance = parts.length > 2 ? parts[2].trim() : '';
+
+                  return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      child: Text.rich(
+                        TextSpan(
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: '${index + 1}. ',
+                              style: TextStyle(color: AppColors.secondary, fontSize: 20),
+                            ),
+                            TextSpan(
+                              text: time,
+                              style: TextStyle(color: AppColors.primary),
+                            ),
+                            const TextSpan(
+                              text: ', ',
+                              style: TextStyle(color: AppColors.secondary),
+                            ),
+                            TextSpan(
+                              text: '$speed',
+                              style: TextStyle(color: AppColors.primary),
+                            ),
+                            const TextSpan(
+                              text: ', ',
+                              style: TextStyle(color: AppColors.secondary),
+                            ),
+                            TextSpan(
+                              text: '$distance',
+                              style: TextStyle(color: AppColors.primary),
+                            ),
+                          ],
+                        ),
+                      )
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -192,28 +225,71 @@ class _TimerPageState extends State<TimerPage> {
 
   Widget CheckResetButton() {
     final settingData = Provider.of<TimerSettingDataProvider>(context).settingData;
-    final isInitial = _seconds == 0;
-    final isRunning = _isRunning;
 
-    if (isInitial) {
+    final isRunning = _isRunning;
+    final hasTimePassed = _seconds > 0;
+
+    if (!isRunning && !hasTimePassed) {
       return ElevationBtn(
         text: '재설정',
         width: 150,
         height: 50,
         onPressed: () {
-      Navigator.pop(context);
-      },
+          Navigator.pop(context);
+        },
       );
     } else if (isRunning) {
       return ElevationBtn(
         onPressed: () {
-          final speed = settingData?.speed.isNotEmpty == true ? settingData!.speed : '입력값 없음';
-          final distance = settingData?.distance.isNotEmpty == true ? settingData!.distance : '입력값 없음';
+          String speed = settingData?.speed ?? '';
+          String distance = settingData?.distance ?? '';
+          String speedUnit = (settingData?.speedUnit == '선택' || settingData?.speedUnit == null) ? 'KM/H' : settingData!.speedUnit!;
+          String distanceUnit = (settingData?.distanceUnit == '선택' || settingData?.distanceUnit == null) ? 'M' : settingData!.distanceUnit!;
+
+          // 단위별 거리 값을 미터 단위로 변환하는 함수 (내부에 넣거나 외부에 따로 만들어도 됨)
+          double distanceToMeters(String dist, String unit) {
+            double val = double.tryParse(dist) ?? 0.0;
+            if (unit.toLowerCase() == 'km') {
+              return val * 1000;
+            }
+            return val; // m 단위면 그대로 리턴
+          }
+
+          // 단위별 속도 값을 km/h 단위로 변환하는 함수
+          double speedToKmPerHour(String spd, String unit) {
+            double val = double.tryParse(spd) ?? 0.0;
+            if (unit.toLowerCase() == 'm/s') {
+              return val * 3.6; // m/s -> km/h 변환
+            }
+            return val; // km/h면 그대로 리턴
+          }
+
+          double? speedDouble = double.tryParse(speed);
+          double? distanceDouble = double.tryParse(distance);
+
+          // 거리 단위를 미터 단위로 변환
+          double distanceInMeters = distanceToMeters(distance, distanceUnit);
+          // 속도를 km/h 단위로 변환
+          double speedInKmh = speedToKmPerHour(speed, speedUnit);
+
+          // 거리 계산 (속도는 있는데 거리 없음)
+          if ((distance.isEmpty || distanceDouble == null) && speedDouble != null && _seconds > 0) {
+            double dist = (speedInKmh * _seconds) / 3.6; // km/h -> m/s 계산식
+            distance = (distanceUnit.toLowerCase() == 'km') ? (dist / 1000).toStringAsFixed(2) : dist.toStringAsFixed(1);
+          }
+
+          // 속도 계산 (거리 있는데 속도 없음)
+          if ((speed.isEmpty || speedDouble == null) && distanceDouble != null && _seconds > 0) {
+            double distMeters = distanceToMeters(distance, distanceUnit);
+            double spd = (distMeters / _seconds) * 3.6; // m/s -> km/h 계산
+            speed = (speedUnit.toLowerCase() == 'm/s') ? (spd / 3.6).toStringAsFixed(2) : spd.toStringAsFixed(1);
+          }
+
+          final speedValue = speed.isEmpty ? '입력값 없음' : '$speed $speedUnit';
+          final distanceValue = distance.isEmpty ? '입력값 없음' : '$distance $distanceUnit';
 
           setState(() {
-            _checkList.add(
-                '${_formatTime(_seconds)}, 속도: $speed ${settingData!.speedUnit}, 거리: $distance ${settingData.distanceUnit}'
-            );
+            _checkList.add('${_formatTime(_seconds)}, $speedValue, $distanceValue');
             _scrollToBottom();
           });
         },
@@ -226,15 +302,19 @@ class _TimerPageState extends State<TimerPage> {
           width: 30,
         ),
       );
-    } else {
+    } else if (!isRunning && hasTimePassed) {
       return ElevationBtn(
         text: '저장 및 초기화',
         width: 150,
         height: 50,
         onPressed: _resetTimer,
       );
+    } else {
+      return const SizedBox.shrink();
     }
   }
+
+
 
 
   Widget Text_Title(String title) {

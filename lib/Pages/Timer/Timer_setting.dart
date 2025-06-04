@@ -80,6 +80,7 @@ class _TimerSettingState extends State<TimerSetting> {
                           items: ['선택', 'M/S', 'KM/H'],
                           value: selectedSpeedUnit,
                           onChanged: (value) {
+                            FocusScope.of(context).unfocus();
                             setState(() {
                               selectedSpeedUnit = value;
                             });
@@ -113,6 +114,7 @@ class _TimerSettingState extends State<TimerSetting> {
                           items: ['선택', 'M', 'KM'],
                           value: selectedDistanceUnit,
                           onChanged: (value) {
+                            FocusScope.of(context).unfocus();
                             setState(() {
                               selectedDistanceUnit = value;
                             });
