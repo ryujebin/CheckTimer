@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
@@ -48,23 +49,39 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 42),
                 child: ElevationBtn(
-                  text: '가입 하기',
+                    text: '가입 하기',
                     onPressed: () async {
                       final email = controller_email.text.trim();
                       final password = controller_pw.text.trim();
+                      final name = controller_name.text.trim();
 
                       try {
                         // 회원가입 시도
-                        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
                           email: email,
                           password: password,
                         );
 
                         final user = FirebaseAuth.instance.currentUser;
 
+                        if (user != null) {
+                          // 2. Firestore에 사용자 정보 저장
+                          try {
+                            await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+                              'name': name,
+                              'email': email,
+                            });
+                            print('Firestore 저장 성공');
+                          } catch (e) {
+                            print('Firestore 저장 실패: $e');
+                          }
+                        }
+
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Authentication()),
+                          MaterialPageRoute(
+                              builder: (context) => const Authentication()),
                         );
                       } on FirebaseAuthException catch (e) {
                         // 이메일 중복 에러 처리
@@ -72,7 +89,8 @@ class SignUp extends StatelessWidget {
                           try {
                             // 기존 계정으로 로그인 시도
                             final userCredential = await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(email: email, password: password);
+                                .signInWithEmailAndPassword(
+                                    email: email, password: password);
                             final user = userCredential.user;
 
                             if (user != null && user.emailVerified) {
@@ -112,7 +130,8 @@ class SignUp extends StatelessWidget {
                               context: context,
                               builder: (_) => AlertDialog(
                                 title: const Text('로그인 실패'),
-                                content: Text('이미 존재하는 계정이지만 로그인에 실패했습니다.\n${e.toString()}'),
+                                content: Text(
+                                    '이미 존재하는 계정이지만 로그인에 실패했습니다.\n${e.toString()}'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(context),
@@ -134,10 +153,7 @@ class SignUp extends StatelessWidget {
                           SnackBar(content: Text("오류 발생: ${e.toString()}")),
                         );
                       }
-                    }
-
-
-                ),
+                    }),
               ),
               TextBtn(
                 text: '이메일 인증하러 가기',
@@ -147,7 +163,8 @@ class SignUp extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Authentication()),
+                    MaterialPageRoute(
+                        builder: (context) => const Authentication()),
                   );
                 },
               ),
