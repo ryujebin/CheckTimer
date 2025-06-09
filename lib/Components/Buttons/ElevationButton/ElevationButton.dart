@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../Core/theme/colors.dart';
 
 class ElevationBtn extends StatelessWidget {
-  final String text;
+  final String? text;
   final Widget? child;
   final double? height;
   final double? width;
