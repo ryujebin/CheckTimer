@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
-
+import 'package:provider/provider.dart';
 import '../MyRecode/Myrecode_main.dart';
-import '../Timer/Timer_main.dart';
+import '../Timer/Timer_setting.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    TimerMain(),
+    TimerSetting(),
     MyRecord(), // 기록화면 추가
   ];
 

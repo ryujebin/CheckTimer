@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../Core/theme/colors.dart';
 
 class InputField extends StatelessWidget {
@@ -8,6 +9,7 @@ class InputField extends StatelessWidget {
   final TextInputType keyboardType;
   final double? width;
   final Widget? suffix;
+  final List<TextInputFormatter>? inputFormatters;
 
   const InputField({
     super.key,
@@ -17,6 +19,7 @@ class InputField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.width,
     this.suffix,
+    this.inputFormatters,
   });
 
   @override
@@ -57,6 +60,7 @@ class InputField extends StatelessWidget {
             child: TextField(
               controller: controller,
               keyboardType: keyboardType,
+              inputFormatters: inputFormatters,
               style: const TextStyle(
                 color: Colors.black,
                 fontFamily: 'Pretendard',

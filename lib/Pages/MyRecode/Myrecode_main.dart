@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/Components/Appbar/Appbar_a_login.dart';
+
+import '../../Components/Appbar/Appbar.dart';
+
 
 class MyRecord extends StatelessWidget {
   const MyRecord({super.key});
@@ -7,7 +9,7 @@ class MyRecord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AfterAppbar(),
+      appBar: MainAppbar(),
       body: const Center(
         child: Text('여기에 기록 내용을 표시할 수 있습니다.'),
       ),

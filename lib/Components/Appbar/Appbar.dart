@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../../Core/theme/colors.dart';
 import '../../Pages/Login/Login.dart';
 
-class BeforeAppbar extends StatefulWidget implements PreferredSizeWidget {
+class MainAppbar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final double fontSize;
   final double leftPadding;
   final VoidCallback? onLoginPressed;
 
-  const BeforeAppbar({
+  const MainAppbar({
     super.key,
     this.title = 'CheckTimer',
     this.fontSize = 20,
@@ -19,13 +19,13 @@ class BeforeAppbar extends StatefulWidget implements PreferredSizeWidget {
   });
 
   @override
-  State<BeforeAppbar> createState() => _BeforeAppbarState();
+  State<MainAppbar> createState() => _MainAppbarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _BeforeAppbarState extends State<BeforeAppbar> {
+class _MainAppbarState extends State<MainAppbar> {
   User? _user;
 
   @override

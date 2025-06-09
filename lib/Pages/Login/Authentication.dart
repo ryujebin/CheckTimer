@@ -7,7 +7,7 @@ import '../../Components/Buttons/ElevationButton/ElevationButton.dart';
 import '../../Components/Buttons/TextButton/TextButton.dart';
 import '../../Components/InputField/InputField.dart';
 import '../../Components/TitleText/TitleText.dart';
-import '../Timer/Timer_main.dart';
+import '../Timer/Timer_setting.dart';
 import 'Login.dart';
 
 class Authentication extends StatelessWidget {

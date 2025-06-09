@@ -33,6 +33,8 @@ class _DropdownState<T> extends State<Dropdown<T>> {
     if (isOpen) {
       _removeDropdown();
     } else {
+      FocusScope.of(context).unfocus();
+
       _showDropdown();
     }
     setState(() {
