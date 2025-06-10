@@ -67,6 +67,7 @@ flutter:
     - assets/images/checkimg.png
     - assets/images/startimg.png
     - assets/images/stopimg.png
+    - assets/images/trashimg.png
 
   fonts:
     - family: Pretendard
