@@ -332,27 +332,24 @@ class _TimerPageState extends State<TimerPage> {
           final user = FirebaseAuth.instance.currentUser;
 
           if (user != null) {
-            // 🔐 로그인된 상태
             try {
-              // Firestore에 저장 (예시로 현재 시간 저장)
-              await FirebaseFirestore.instance
-                  .collection('timerData')
-                  .doc(user.uid)
-                  .set({
+              final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
+
+              // ⏱️ 타이머 데이터 저장
+              final timerRef = await userDoc.collection('timerDatas').add({
+                'uid': user.uid,
                 'title': settingData!.title,
                 'speed': settingData.speed,
-                'speedUnit' : settingData.speedUnit,
-                'distance' : settingData.distance,
-                'distanceUnit' : settingData.distanceUnit,
-                // 필요한 데이터 추가
-                // 예: 'distance': totalDistance, 'speed': averageSpeed, ...
+                'speedUnit': settingData.speedUnit,
+                'distance': settingData.distance,
+                'distanceUnit': settingData.distanceUnit,
+                'createdAt': FieldValue.serverTimestamp(),
               });
 
-              await FirebaseFirestore.instance
-                  .collection('checkData')
-                  .doc(user.uid)
-                  .set({
-                'checkList': _checkList, // List 또는 Map 형태 모두 가능
+              // ✅ 체크리스트 저장 (서브컬렉션으로)
+              await timerRef.collection('checkList').add({
+                'checkList': _checkList,
+                'savedAt': FieldValue.serverTimestamp(),
               });
 
               // 타이머 초기화

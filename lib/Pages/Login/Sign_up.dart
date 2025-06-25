@@ -71,6 +71,7 @@ class SignUp extends StatelessWidget {
                             await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
                               'name': name,
                               'email': email,
+                              'createdAt': FieldValue.serverTimestamp(),
                             });
                             print('Firestore 저장 성공');
                           } catch (e) {
