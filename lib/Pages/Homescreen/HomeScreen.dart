@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/Core/theme/colors.dart';
 import 'package:provider/provider.dart';
-import '../MyRecode/Myrecode_main.dart';
+import '../MyRecord/Myrecord_main.dart';
 import '../Timer/Timer_setting.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              label: '기록',
+              label: 'MY기록',
             ),
           ],
         ),
