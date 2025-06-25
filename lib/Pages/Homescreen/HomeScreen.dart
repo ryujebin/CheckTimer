@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
-              label: 'MY 기록',
+              label: 'MY기록',
             ),
           ],
         ),
