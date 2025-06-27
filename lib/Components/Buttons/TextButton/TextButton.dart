@@ -12,6 +12,7 @@ class TextBtn extends StatelessWidget {
   final bool underline;
   final double? height; // ← 추가됨
   final Color textcolor;
+  final TextAlign textAlign;
 
   const TextBtn({
     super.key,
@@ -24,6 +25,7 @@ class TextBtn extends StatelessWidget {
     this.underline = false,
     this.height, // ← 추가됨
     this.textcolor = AppColors.primary,
+    this.textAlign = TextAlign.left,
   });
 
   @override
@@ -45,13 +47,16 @@ class TextBtn extends StatelessWidget {
           fontFamily: 'Pretendard',
           fontWeight: fontWeight,
           decoration:
-          underline ? TextDecoration.underline : TextDecoration.none,
+              underline ? TextDecoration.underline : TextDecoration.none,
         ),
       ),
-      child: Text(text,
-      style: TextStyle(
-        color: textcolor,
-      ),),
+      child: Text(
+        text,
+        textAlign: textAlign,
+        style: TextStyle(
+          color: textcolor,
+        ),
+      ),
     );
   }
 }

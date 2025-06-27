@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:test_flutter/Pages/Homescreen/HomeScreen.dart';
 
 import '../../Core/theme/colors.dart';
 import '../../Pages/Login/Login.dart';
+import '../../Pages/Timer/Timer_setting.dart';
 
 class MainAppbar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -40,13 +42,35 @@ class _MainAppbarState extends State<MainAppbar> {
   }
 
   void _handleLogout() async {
-    await FirebaseAuth.instance.signOut();
-    setState(() {
-      _user = null;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("로그아웃 되었습니다.")),
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('로그아웃 확인'),
+        content: const Text('로그아웃 하시겠습니까?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true), // 네
+            child: const Text('네'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false), // 아니요
+            child: const Text('아니요'),
+          ),
+        ],
+      ),
     );
+
+    if (shouldLogout == true) {
+      await FirebaseAuth.instance.signOut();
+      setState(() {
+        _user = null;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("로그아웃 되었습니다.")),
+      );
+      // ✅ TimerSetting 페이지로 이동
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+    }
   }
 
   @override
